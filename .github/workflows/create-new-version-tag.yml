@@ -14,17 +14,6 @@ jobs:
           fetch-depth: 0
           token: ${{ secrets.BOT_TOKEN }}
 
-      - name: Set up Java
-        uses: actions/setup-java@v3
-        with:
-          distribution: 'zulu'
-          java-version: 19
-
-      - name: Build
-        uses: gradle/gradle-build-action@v2
-        with:
-          arguments: build
-
       - name: Create new version tag
         uses: gradle/gradle-build-action@v2
         with:
