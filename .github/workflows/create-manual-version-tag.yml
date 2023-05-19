@@ -35,7 +35,7 @@ jobs:
 
       - name: Extract parameters from selected choice
         id: extract-parameters
-        run: ./.github/scripts/extract_parameters.sh
+        run: ./.github/scripts/extract_parameters.sh ${{ github.event.inputs.stage }}
         shell: bash
 
       - name: Generate Tag
