@@ -23,7 +23,7 @@ jobs:
       - name: Create new version tag
         uses: gradle/gradle-build-action@v2
         with:
-          arguments: createSemverTag -Psemver.stage=auto
+          arguments: createSemverTag -Psemver.scope=auto
 
       - name: Push Tag
         run: git push --follow-tags
