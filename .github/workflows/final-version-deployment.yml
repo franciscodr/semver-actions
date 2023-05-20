@@ -26,11 +26,3 @@ jobs:
 
       - name: Deployment
         run: echo "Deployment of the final version"
-
-      - name: Generate next alpha tag
-        uses: gradle/gradle-build-action@v2
-        with:
-          arguments: createSemverTag -Psemver.stage=alpha -Psemver.scope=auto
-
-      - name: Push Tag
-        run: git push --follow-tags

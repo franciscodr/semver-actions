@@ -20,10 +20,27 @@ jobs:
           distribution: 'zulu'
           java-version: 17
 
+      - name: Build
+        uses: gradle/gradle-build-action@v2
+        with:
+          arguments: build
+
+      - name: Read version
+        id: read-version
+        run: echo "version=$(head -n 1 build/semver/version.txt)" >> "$GITHUB_OUTPUT"
+
       - name: Create new version tag
+        if: |
+          contains(steps.read-version.outputs.version, 'alpha') ||
+          contains(steps.read-version.outputs.version, 'beta') ||
+          contains(steps.read-version.outputs.version, 'rc')
         uses: gradle/gradle-build-action@v2
         with:
           arguments: createSemverTag -Psemver.scope=auto
 
       - name: Push Tag
+        if: |
+          contains(steps.read-version.outputs.version, 'alpha') ||
+          contains(steps.read-version.outputs.version, 'beta') ||
+          contains(steps.read-version.outputs.version, 'rc')
         run: git push --follow-tags
