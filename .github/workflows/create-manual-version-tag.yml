@@ -7,7 +7,7 @@ on:
       stage:
         description: 'Stage'
         required: true
-        default: 'alpha'
+        default: 'alpha-patch'
         type: choice
         options:
           - 'alpha-major'
